@@ -1,13 +1,16 @@
-import './App.css'
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [msg, setMsg] = useState("");
 
-  return (
-    <>
-      <div className='text-3xl font-bold underline text-blue-600'>Hello World</div>
-    </>
-  )
+  useEffect(() => {
+    axios.get("http://127.0.0.1:8000/api/hello")
+      .then(res => setMsg(res.data.message))
+      .catch(err => console.error(err));
+  }, []);
+
+  return <h1>{msg}</h1>;
 }
 
-export default App
+export default App;
